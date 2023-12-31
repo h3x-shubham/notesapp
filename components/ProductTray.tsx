@@ -25,7 +25,7 @@ function ProductTray({ className, notes, pinned }: any) {
       className={`columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 2xl:columns-6 gap-4 mb-4 ${className}`}
     >
       {pinned
-        ? sortedPinnedNotes.map((item, index) => (
+        ? sortedPinnedNotes.map((item:any, index:any) => (
             <div
               className="break-inside-avoid mb-4 "
               // transition delay-150 duration-300 ease-in-out"
@@ -34,7 +34,7 @@ function ProductTray({ className, notes, pinned }: any) {
               <ProductTrayItem details={item} />
             </div>
           ))
-        : sortedUnpinnedNotes.map((item, index) => (
+        : sortedUnpinnedNotes.map((item:any, index:any) => (
             <div
               className="break-inside-avoid mb-4"
               // transition delay-150 duration-300 ease-in-out"

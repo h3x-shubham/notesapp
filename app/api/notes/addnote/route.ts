@@ -1,8 +1,17 @@
 import { authoptions } from "@/lib/options"
 import prisma from "@/lib/prisma"
+import { Session } from 'next-auth';
 import { getServerSession } from "next-auth/next"
 import { revalidatePath } from "next/cache"
 import { NextRequest } from "next/server"
+type UserSession = Session & {
+    user: {
+        id?: string| null | undefined; // Include other user properties as needed
+        name?: string | null | undefined;
+        email?: string | null | undefined;
+        image?: string | null | undefined;
+    } | undefined;
+};
 
 async function exists<Model extends { count: any }>(model: Model, args: Parameters<Model['count']>[0]) {
     const count = await model.count(args)
@@ -11,13 +20,14 @@ async function exists<Model extends { count: any }>(model: Model, args: Paramete
 
 export async function POST(req: NextRequest) {
     try {
-        const session = await getServerSession(authoptions)
+        const session = await getServerSession(authoptions) as UserSession;
         if (!session) {
             return new Response(JSON.stringify({ msg: "UNAUTHORIZED ACCESS!" }))
 
         }
-        let userId;
         const user = session?.user
+       
+      
         const item = await req.json()
         const notesExists = await exists(prisma.notes, {
             where: {
