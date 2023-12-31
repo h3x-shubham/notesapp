@@ -1,7 +1,7 @@
 import { headers } from "next/headers"
 export async function getnotes() {
     try {
-        const res = await fetch("http://localhost:3000/api/notes/getallnote", {
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/notes/getallnote`, {
             cache: 'no-cache',
             method: "GET",
             headers: headers()
