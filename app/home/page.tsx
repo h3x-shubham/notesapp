@@ -13,6 +13,7 @@ export default async function page() {
   return (
     <div>
       {/* <HomePinned data={d}/> */}
+      {JSON.stringify(`${process.env.NEXTAUTH_URL}/api/notes/getallnote`)}
       <HomeMain data={d} />
     </div>
   );
